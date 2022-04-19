@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "Richie",
+    "startup-message": "$t(app.name) is awake!",
+    "shutdown-message": "goodnite, sweet world ResidentSleeper"
+  },
+  "modules": {
+    "test": {
+      "commands": {
+        "test": {
+          "response": "Hello there, {{user}}"
+        }
+      }
+    },
+    "utils": {
+      "commands": {
+        "uptime": {
+          "response": "Stream been online for {{streamDurationFormatted}}",
+          "response_no-stream": "Stream is offline :-("
+        }
+      }
+    }
+  }
+}

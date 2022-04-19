@@ -1,0 +1,9 @@
+export const APP_CONFIG = Symbol('APP_CONFIG');
+export const AUTH_SERVICE = Symbol('AUTH_SERVICE');
+export const DB_CONNECTION = Symbol('DB_CONNECTION');
+export const EVENTSUB_MIDDLEWARE = Symbol('EVENTSUB_MIDDLEWARE');
+export const HTTP_SERVER = Symbol('HTTP_SERVER');
+export const I18N = Symbol('I18N');
+export const TWITCH_API_CLIENT = Symbol('TWITCH_API_CLIENT');
+export const TWITCH_CHAT_CLIENT = Symbol('TWITCH_CHAT_CLIENT');
+export const WINSTON_LOGGER = Symbol('WINSTON_LOGGER');

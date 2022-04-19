@@ -1,0 +1,11 @@
+# IDE poop
+.idea
+.vscode
+
+cache
+node_modules
+
+.env
+config.json
+ormconfig.json
+*.log

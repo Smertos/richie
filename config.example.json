@@ -1,0 +1,16 @@
+{
+    "account": {
+        "userName": "devel_bot"
+    },
+    "bots": [
+        {
+            "admins": ["smertos"],
+            "channelName": "smertos",
+            "locale": "en-US"
+        }
+    ],
+    "twitchCommon": {
+        "clientId": "...",
+        "clientSecret": "..."
+    }
+}

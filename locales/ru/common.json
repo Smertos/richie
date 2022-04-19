@@ -1,0 +1,24 @@
+{
+  "app": {
+    "name": "Richie",
+    "startup-message": "$t(app.name) очнулся!",
+    "shutdown-message": "хороших снов, сладкий мир ResidentSleeper"
+  },
+  "modules": {
+    "test": {
+      "commands": {
+        "test": {
+          "response": "Ну здарова, {{user}}"
+        }
+      }
+    },
+    "utils": {
+      "commands": {
+        "uptime": {
+          "response": "Стрим уже живёт {{streamDurationFormatted}}",
+          "response_no-stream": "Стрим оффлайн :-("
+        }
+      }
+    }
+  }
+}
