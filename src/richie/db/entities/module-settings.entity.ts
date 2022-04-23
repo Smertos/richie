@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 import { BotModuleId, TBotModuleSettings } from 'richie/modules/api/types';
 
-@Entity()
+@Entity({ name: 'module_settings' })
 export class ModuleSettingsEntity extends BaseEntity {
 
   @PrimaryColumn()

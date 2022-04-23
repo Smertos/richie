@@ -6,15 +6,16 @@ import { i18n } from 'i18next';
 import { Connection } from 'typeorm';
 import winston from 'winston';
 import { AuthService } from './auth';
-import { CommandManager } from './commands';
 import { ConfigBot } from './config';
-import { BotModuleManager } from './modules/api';
+import { BotModuleManager, CommandManager, MessageTimerManager } from './managers';
+import { Command } from './models';
 
 export class Bot {
   private hasSentStartupMessage: boolean = false;
 
+  public readonly botModuleManager: BotModuleManager;
   public readonly commandManager: CommandManager;
-  public readonly moduleManager: BotModuleManager;
+  public readonly messageTimerManager: MessageTimerManager;
 
   channelOwnerUserId: string = '0';
   dateFnsLocale?: Locale;
@@ -38,8 +39,9 @@ export class Bot {
       );
     }
 
+    this.botModuleManager = new BotModuleManager(this);
     this.commandManager = new CommandManager(this);
-    this.moduleManager = new BotModuleManager(this);
+    this.messageTimerManager = new MessageTimerManager(this);
 
     this.ircChannelName = '#' + botConfig.channelName;
 
@@ -56,6 +58,8 @@ export class Bot {
     if (!this.hasSentStartupMessage) {
       const startupMessage = this.i18n.t('app.startup-message');
       await this.chatClient.say(this.botConfig.channelName, startupMessage);
+
+      this.hasSentStartupMessage = true;
     }
   };
 
@@ -74,7 +78,7 @@ export class Bot {
 
     this.logger.debug(`<${user}>: ${message}`);
 
-    if (message && message.startsWith('!')) {
+    if (message && message.startsWith(Command.prefix)) {
       const [commandSlug, ...commandArgs] = message.slice(1).split(' ');
 
       this.commandManager.onCommand(user, commandSlug, commandArgs);
@@ -96,7 +100,7 @@ export class Bot {
       return;
     }
 
-    await this.moduleManager.init();
+    await this.botModuleManager.init();
 
     const channelOwner = await this.apiClient.users.getUserByName(this.botConfig.channelName);
 
@@ -129,6 +133,6 @@ export class Bot {
       await subscription.stop();
     }
 
-    await this.moduleManager.destroy();
+    await this.botModuleManager.destroy();
   }
 }

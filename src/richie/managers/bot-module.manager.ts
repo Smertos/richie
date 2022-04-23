@@ -1,7 +1,7 @@
 import { Bot } from 'richie/bot';
-import { BotModule } from './bot-module';
-import { BotModuleId } from './types';
+import { BotModule, BotModuleId } from 'richie/modules/api';
 import { TestBotModule } from 'richie/modules/test';
+import { TimersBotModule } from 'richie/modules/timers';
 import { UtilsBotModule} from 'richie/modules/utils';
 
 export class BotModuleManager {
@@ -19,6 +19,7 @@ export class BotModuleManager {
 
   async init(): Promise<void> {
     await this.loadModule(new TestBotModule(this.bot));
+    await this.loadModule(new TimersBotModule(this.bot));
     await this.loadModule(new UtilsBotModule(this.bot));
   }
 

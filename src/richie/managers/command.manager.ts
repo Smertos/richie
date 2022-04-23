@@ -1,5 +1,5 @@
 import { Bot } from 'richie/bot';
-import { Command } from './command';
+import { Command } from 'richie/models';
 
 export class CommandManager {
   private registeredCommands: Record<string, Command> = {};

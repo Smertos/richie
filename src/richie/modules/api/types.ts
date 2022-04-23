@@ -1,6 +1,7 @@
 export const enum BotModuleId {
   Default = 'DEFAULT',
   Test = 'TEST',
+  Timers = 'TIMERS',
   Utils = 'UTILS'
 }
 

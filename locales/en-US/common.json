@@ -12,6 +12,13 @@
         }
       }
     },
+    "timers": {
+      "commands": {
+        "add-timer": {
+          "response": "Message spam timer №{{timerId}} created!"
+        }
+      }
+    },
     "utils": {
       "commands": {
         "uptime": {

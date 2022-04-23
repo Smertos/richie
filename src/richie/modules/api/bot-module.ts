@@ -1,7 +1,7 @@
 import { Bot } from 'richie/bot';
-import { Command } from 'richie/commands';
 import { ModuleSettingsEntity } from 'richie/db/entities';
-import { TBotModuleInfo, TBotModuleSettings, BotModuleId } from './types';
+import { Command } from 'richie/models';
+import { TBotModuleInfo, TBotModuleSettings } from './types';
 
 export class BotModule<Settings extends TBotModuleSettings = TBotModuleSettings> {
   static readonly defaultModuleSettings: TBotModuleSettings = {

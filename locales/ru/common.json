@@ -12,6 +12,13 @@
         }
       }
     },
+    "timers": {
+      "commands": {
+        "add-timer": {
+          "response": "Таймер-спаммер №{{timerId}} создан!"
+        }
+      }
+    },
     "utils": {
       "commands": {
         "uptime": {

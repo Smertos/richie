@@ -1,6 +1,6 @@
 import { intervalToDuration, formatDuration } from 'date-fns';
 import { Bot } from 'richie/bot';
-import { Command } from 'richie/commands';
+import { Command } from 'richie/models';
 
 export class UptimeCommand extends Command {
   constructor(bot: Bot) {
