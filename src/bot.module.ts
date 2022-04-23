@@ -70,8 +70,6 @@ const manualProviders: Array<Provider> = [
         webSocket: true
       });
 
-      await chatClient.connect();
-
       return chatClient;
     }
   },

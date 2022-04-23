@@ -55,6 +55,9 @@ export class BotManager {
 
       this.bots.set(botConfig.channelName, bot);
     }
+
+    // Connect to chats only after creating all the bots so all of them get channel join events
+    await this.chatClient.connect();
   }
 
   // Will be called by NestJS
