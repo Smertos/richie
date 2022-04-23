@@ -1,4 +1,3 @@
-import { MakeOptional } from '@d-fischer/shared-utils';
 import express from 'express';
 import { Request, Response } from 'express/ts4.0';
 import { Passport } from 'passport';
@@ -32,7 +31,7 @@ const callbackRoute = '/callback';
 const loginRoute = '/login';
 
 export async function authorizeUser(config: ConfigRoot, logger: winston.Logger): Promise<AuthCacheModel> {
-  const { authCallbackHost, authCallbackPort, twitchCommon } = config;
+  const { authCallbackHost, authCallbackPort } = config;
 
   const authClientProtocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const authClientBaseURL = `${authClientProtocol}://${authCallbackHost}:${authCallbackPort}`;
@@ -46,8 +45,8 @@ export async function authorizeUser(config: ConfigRoot, logger: winston.Logger):
 
     const oauthStrategy = new TwitchOAuth2Strategy({
       callbackURL,
-      clientID: twitchCommon.clientId,
-      clientSecret: twitchCommon.clientSecret,
+      clientID: process.env.TWITCH_CLIENT_ID,
+      clientSecret: process.env.TWITCH_CLIENT_SECRET,
       scope: getAllScopes()
     }, (accessToken: string, refreshToken: string) => {
       const newTokenData = new AuthCacheModel();

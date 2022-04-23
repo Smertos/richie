@@ -50,7 +50,7 @@ const manualProviders: Array<Provider> = [
     inject: [WINSTON_LOGGER, APP_CONFIG],
     provide: AUTH_SERVICE,
     useFactory: async (logger: winston.Logger, config: ConfigRoot) => {
-      const authService = new AuthService(logger, config);
+      const authService = new AuthService(logger);
       await authService.setup(config);
 
       return authService;

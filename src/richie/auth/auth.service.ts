@@ -16,13 +16,10 @@ export class AuthService {
   appAuthProvider: ClientCredentialsAuthProvider;
   clientAuthProvider?: RefreshingAuthProvider;
 
-  constructor(
-    @Inject(WINSTON_LOGGER) private logger: winston.Logger,
-    @Inject(APP_CONFIG) config: ConfigRoot
-  ) {
+  constructor(@Inject(WINSTON_LOGGER) private logger: winston.Logger) {
     this.appAuthProvider = new ClientCredentialsAuthProvider(
-      config.twitchCommon.clientId,
-      config.twitchCommon.clientSecret
+      process.env.TWITCH_CLIENT_ID,
+      process.env.TWITCH_CLIENT_SECRET
     );
   }
 
@@ -47,9 +44,6 @@ export class AuthService {
   };
 
   async setup(config: ConfigRoot): Promise<void> {
-    const { twitchCommon } = config;
-    const { clientId, clientSecret } = twitchCommon;
-
     const loadedCache = await this.loadTokenData();
 
     if (loadedCache) {
@@ -58,8 +52,8 @@ export class AuthService {
 
     const authProvider = new RefreshingAuthProvider(
       {
-        clientId,
-        clientSecret,
+        clientId: process.env.TWITCH_CLIENT_ID,
+        clientSecret: process.env.TWITCH_CLIENT_SECRET,
         onRefresh: this.onTokenRefresh
       },
       this.cache

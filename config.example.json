@@ -8,9 +8,5 @@
             "channelName": "smertos",
             "locale": "en-US"
         }
-    ],
-    "twitchCommon": {
-        "clientId": "...",
-        "clientSecret": "..."
-    }
+    ]
 }
