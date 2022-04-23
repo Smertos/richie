@@ -1,29 +1,39 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin"
+  ],
   "extends": [
     "eslint:recommended",
-    "plugin:import/recommended"
-  ],
-  "overrides": [
-    {
-      "files": ["**/*.ts"],
-      "parser": "@typescript-eslint/parser",
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/typescript"
-      ]
-    }
+    "plugin:import/recommended",
+    "plugin:node/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
   ],
   "rules": {
     // for testing if eslint works properly,
     // feel free to remove this if you do not need it
-    "import/no-unused-modules": [1, {"unusedExports": true}]
+    "import/no-unused-modules": ["warn", {"unusedExports": true}],
+    "import/no-named-as-default-member": ["off"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-inferrable-types": ["off"],
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "node/no-unsupported-features/es-syntax": ["off"],
+    "node/no-missing-import": ["off"],
+    "node/no-extraneous-import": ["off"]
   },
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts"]
     },
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   }
 }

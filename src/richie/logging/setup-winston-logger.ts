@@ -1,5 +1,5 @@
 import { TransformableInfo } from 'logform';
-import winston, { createLogger, format, } from 'winston';
+import winston, { createLogger, format } from 'winston';
 
 const ignoreVerbose = format((info: TransformableInfo): TransformableInfo | boolean => {
     if (info.level === 'verbose') {

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AccessToken, ClientCredentialsAuthProvider, RefreshingAuthProvider } from '@twurple/auth';
-import { APP_CONFIG, WINSTON_LOGGER } from 'bot.consts';
+import { WINSTON_LOGGER } from 'bot.consts';
 import { ConfigRoot } from 'richie/config';
 import { loadAndDeserializeJson, saveAndSerializeJson } from 'richie/utils';
 import winston from 'winston';

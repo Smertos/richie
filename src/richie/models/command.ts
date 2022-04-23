@@ -1,6 +1,6 @@
 import { Bot } from 'richie/bot';
 
-export class Command {
+export abstract class Command {
   public static readonly prefix: string = '!';
 
   public isEnabled: boolean = false;
@@ -19,7 +19,7 @@ export class Command {
     this.isEnabled = true;
   }
 
-  async execute(user: string, args: Array<string>): Promise<void> { }
+  abstract execute(user: string, args: Array<string>): Promise<void>;
 
   get usage(): string {
     const baseUsage = `Usage: ${Command.prefix}${this.slug}`;

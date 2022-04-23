@@ -8,7 +8,6 @@ export class TestCommand extends Command {
 
   override async execute(user: string, _args: Array<string>): Promise<void> {
     const responseMessage = this.bot.i18n.t('modules.test.commands.test.response', { user });
-    console.log(responseMessage);
     await this.bot.chatClient.say(this.bot.botConfig.channelName, responseMessage);
   }
 }

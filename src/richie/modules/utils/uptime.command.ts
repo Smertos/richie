@@ -7,7 +7,7 @@ export class UptimeCommand extends Command {
     super('uptime', bot);
   }
 
-  override async execute(user: string, args: Array<string>): Promise<void> {
+  override async execute(_user: string, _args: Array<string>): Promise<void> {
     const currentStream = await this.bot.apiClient.streams.getStreamByUserId(this.bot.channelOwnerUserId);
 
     if (!currentStream) {

@@ -7,9 +7,13 @@
   "private": true,
   "scripts": {
     "build": "rimraf ./build && tsc",
-    "lint": "eslint . --ext .ts",
-    "start": "npm run build && node build/index.js",
-    "start:dev": "nodemon"
+    "build:docker": "docker build . -t richie:local",
+    "lint": "npm run lint:typescript && npm run lint:eslint",
+    "lint:eslint": "eslint . --ext .ts",
+    "lint:typescript": "tsc --noEmit",
+    "start": "NODE_PATH=build/ node build/main.js",
+    "start:dev": "nodemon",
+    "start:docker": "docker run --network host --name=richie richie:local"
   },
   "husky": {
     "hooks": {
@@ -17,7 +21,6 @@
     }
   },
   "dependencies": {
-    "@aidenhadisi/amazeful-twitch-irc": "4.5.1",
     "@nestjs/common": "8.3.1",
     "@nestjs/core": "8.3.1",
     "@nestjs/platform-express": "8.3.1",
@@ -26,17 +29,18 @@
     "@twurple/chat": "5.0.13",
     "@twurple/eventsub": "5.0.19",
     "class-transformer": "0.5.1",
-    "date-fns": "^2.28.0",
+    "date-fns": "2.28.0",
     "dotenv": "10.0.0",
     "express": "4.17.2",
     "http-graceful-shutdown": "3.1.5",
     "i18next": "21.6.3",
     "i18next-fs-backend": "1.1.4",
     "nest-winston": "1.6.2",
-    "ngrok": "^4.3.1",
+    "ngrok": "4.3.1",
     "passport": "0.5.2",
     "passport-oauth2": "1.6.1",
     "pg": "8.7.1",
+    "reflect-metadata": "0.1.13",
     "rxjs": "7.5.4",
     "tsconfig-paths": "3.12.0",
     "typeorm": "0.2.41",
@@ -45,13 +49,14 @@
   },
   "devDependencies": {
     "@types/i18next-fs-backend": "1.1.2",
-    "@types/koa": "2.13.4",
     "@types/node": "17.0.21",
     "@types/passport-oauth2": "1.4.11",
     "@typescript-eslint/eslint-plugin": "5.14.0",
+    "@typescript-eslint/parser": "5.20.0",
     "eslint": "8.10.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
     "husky": "7.0.4",
     "nodemon": "2.0.15",
     "rimraf": "3.0.2",

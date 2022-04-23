@@ -1,6 +1,6 @@
 import { ApiClient } from '@twurple/api';
 import { ChatClient, PrivateMessage } from '@twurple/chat';
-import { EventSubChannelBanEvent, EventSubMiddleware, EventSubSubscription } from '@twurple/eventsub';
+import { EventSubMiddleware, EventSubSubscription } from '@twurple/eventsub';
 import { Locale } from 'date-fns';
 import { i18n } from 'i18next';
 import { Connection } from 'typeorm';
@@ -111,12 +111,6 @@ export class Bot {
     }
 
     this.channelOwnerUserId = channelOwner.id;
-
-    // const sub = await this.eventSubMiddleware.subscribeToChannelBanEvents(this.channelOwnerUserId, (event: EventSubChannelBanEvent) => {
-    //   console.log(event);
-    // });
-
-    // this.subscriptions.push(sub);
 
     this.logger.info('Started bot for channel %s', this.botConfig.channelName);
   }

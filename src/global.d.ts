@@ -1,3 +1,6 @@
+// Says NodeJS & ProcessEnv are unused, which is not true
+/* eslint-disable */
+
 namespace NodeJS {
   interface ProcessEnv {
     APP_PORT: string;

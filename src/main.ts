@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { EventSubChannelUpdateEvent, EventSubMiddleware } from '@twurple/eventsub';
-import { EVENTSUB_MIDDLEWARE } from 'bot.consts';
+import { EventSubMiddleware } from '@twurple/eventsub';
 import dotenv from 'dotenv';
 import { mkdir } from 'fs/promises';
 import { WinstonLogger } from 'nest-winston';
+import { EVENTSUB_MIDDLEWARE } from './bot.consts';
 import { BotManager } from './bot.manager';
 import { BotModule } from './bot.module';
 import express from 'express';
