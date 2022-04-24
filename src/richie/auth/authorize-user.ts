@@ -31,14 +31,14 @@ const callbackRoute = '/callback';
 const loginRoute = '/login';
 
 export async function authorizeUser(logger: winston.Logger): Promise<AuthCacheModel> {
-  const authClientProtocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const authClientBaseURL = `${authClientProtocol}://${process.env.PUBLIC_HOSTNAME}:${APP_AUTH_PORT}`;
+  const authClientProtocol = process.env.ENVIRONMENT !== 'development' ? 'https' : 'http';
+  const authClientBaseURL = `${authClientProtocol}://${process.env.PUBLIC_HOSTNAME}:${process.env.PUBLIC_AUTH_PORT}`;
   const callbackURL = `${authClientBaseURL}${callbackRoute}`;
   const loginURL = `${authClientBaseURL}${loginRoute}`;
 
   return new Promise((resolve) => {
     const app = express();
-    const server = app.listen(APP_AUTH_PORT, process.env.PUBLIC_HOSTNAME);
+    const server = app.listen(APP_AUTH_PORT, process.env.LOCAL_HOSTNAME);
     const passport = new Passport();
 
     const oauthStrategy = new TwitchOAuth2Strategy({

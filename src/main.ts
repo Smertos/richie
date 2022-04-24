@@ -37,10 +37,13 @@ async function startRichie(): Promise<void> {
 
   await app.get(BotManager).start();
 
-  await app.listen(APP_PORT, async () => {
+  await app.listen(APP_PORT, process.env.LOCAL_HOSTNAME, async () => {
     await eventSubMiddleware.markAsReady();
 
-    logger.log(`API started at http://127.0.0.1:${APP_PORT}`);
+    const isProduction = process.env.ENVIRONMENT !== 'development';
+    const scheme = isProduction ? 'https' : 'http';
+
+    logger.log(`API started at ${scheme}://${process.env.LOCAL_HOSTNAME}/api`);
   });
 }
 

@@ -5,7 +5,8 @@ namespace NodeJS {
   interface ProcessEnv {
     ENVIRONMENT: string;
     EVENTSUB_SECRET: string;
-    PUBLIC_HOSTNAME: string;
+    LOCAL_HOSTNAME: string;
+    PUBLIC_AUTH_PORT: string;
     PUBLIC_HOSTNAME: string;
     TWITCH_CLIENT_ID: string;
     TWITCH_CLIENT_SECRET: string;

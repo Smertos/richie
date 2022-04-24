@@ -19,7 +19,7 @@ export function setupWinstonLogger(): winston.Logger {
         ]
     });
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.ENVIRONMENT !== 'production') {
         const consoleTransport = new winston.transports.Console({
             format: winston.format.combine(
                 winston.format.splat(),
