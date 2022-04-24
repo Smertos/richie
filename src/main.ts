@@ -43,7 +43,7 @@ async function startRichie(): Promise<void> {
     const isProduction = process.env.ENVIRONMENT !== 'development';
     const scheme = isProduction ? 'https' : 'http';
 
-    logger.log(`API started at ${scheme}://${process.env.LOCAL_HOSTNAME}/api`);
+    logger.log(`API started at ${scheme}://${process.env.PUBLIC_HOSTNAME}/api`);
   });
 }
 
