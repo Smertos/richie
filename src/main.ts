@@ -3,7 +3,7 @@ import { EventSubMiddleware } from '@twurple/eventsub';
 import dotenv from 'dotenv';
 import { mkdir } from 'fs/promises';
 import { WinstonLogger } from 'nest-winston';
-import { EVENTSUB_MIDDLEWARE } from './bot.consts';
+import { APP_PORT, EVENTSUB_MIDDLEWARE } from './bot.consts';
 import { BotManager } from './bot.manager';
 import { BotModule } from './bot.module';
 import express from 'express';
@@ -37,11 +37,10 @@ async function startRichie(): Promise<void> {
 
   await app.get(BotManager).start();
 
-  const appPort = +process.env.APP_PORT;
-  await app.listen(appPort, async () => {
+  await app.listen(APP_PORT, async () => {
     await eventSubMiddleware.markAsReady();
 
-    logger.log(`API started at http://127.0.0.1:${appPort}`);
+    logger.log(`API started at http://127.0.0.1:${APP_PORT}`);
   });
 }
 

@@ -13,7 +13,8 @@
     "lint:typescript": "tsc --noEmit",
     "start": "NODE_PATH=build/ node build/main.js",
     "start:dev": "nodemon",
-    "start:docker": "docker run --network host --name=richie richie:local"
+    "start:docker": "mkdir -p cache && docker run -it --rm --network host --mount type=bind,source=$PWD/cache,target=/app/cache,bind-propagation=shared --name=richie richie:local",
+    "start:docker:detached": "mkdir -p cache && docker run -d --rm --network host --mount type=bind,source=$PWD/cache,target=/app/cache,bind-propagation=shared --name=richie richie:local"
   },
   "husky": {
     "hooks": {

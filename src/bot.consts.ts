@@ -1,4 +1,6 @@
 export const APP_CONFIG = Symbol('APP_CONFIG');
+export const APP_PORT = 3333;
+export const APP_AUTH_PORT = 8999;
 export const AUTH_SERVICE = Symbol('AUTH_SERVICE');
 export const DB_CONNECTION = Symbol('DB_CONNECTION');
 export const EVENTSUB_MIDDLEWARE = Symbol('EVENTSUB_MIDDLEWARE');

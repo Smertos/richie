@@ -12,7 +12,18 @@ import { setupI18n } from 'richie/i18n';
 import { setupChatClientLogger, setupWinstonLogger } from 'richie/logging';
 import { apiModules } from 'richie/modules';
 import winston from 'winston';
-import { APP_CONFIG, AUTH_SERVICE, DB_CONNECTION, EVENTSUB_MIDDLEWARE, HTTP_SERVER, I18N, TWITCH_API_CLIENT, TWITCH_CHAT_CLIENT, WINSTON_LOGGER } from './bot.consts';
+import {
+  APP_CONFIG,
+  APP_PORT,
+  AUTH_SERVICE,
+  DB_CONNECTION,
+  EVENTSUB_MIDDLEWARE,
+  HTTP_SERVER,
+  I18N,
+  TWITCH_API_CLIENT,
+  TWITCH_CHAT_CLIENT,
+  WINSTON_LOGGER
+} from './bot.consts';
 import { BotManager } from './bot.manager';
 
 const manualProviders: Array<Provider> = [
@@ -47,11 +58,11 @@ const manualProviders: Array<Provider> = [
     useFactory: (logger: winston.Logger) => loadConfig(logger)
   },
   {
-    inject: [WINSTON_LOGGER, APP_CONFIG],
+    inject: [WINSTON_LOGGER],
     provide: AUTH_SERVICE,
-    useFactory: async (logger: winston.Logger, config: ConfigRoot) => {
+    useFactory: async (logger: winston.Logger) => {
       const authService = new AuthService(logger);
-      await authService.setup(config);
+      await authService.setup();
 
       return authService;
     }
@@ -89,7 +100,7 @@ const manualProviders: Array<Provider> = [
     useFactory: async (apiClient: ApiClient) => {
       const isDevelopment = process.env.ENVIRONMENT === 'development';
       const hostName = isDevelopment
-        ? await connect({ addr: +process.env.APP_PORT }).then(url => url.replace(/^https?:\/\/|\/$/, ''))
+        ? await connect({ addr: APP_PORT }).then(url => url.replace(/^https?:\/\/|\/$/, ''))
         : process.env.PUBLIC_HOSTNAME;
 
       console.log('hostname:', hostName);
