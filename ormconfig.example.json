@@ -4,6 +4,6 @@
     "port": 5432,
     "username": "richie",
     "password": "richie",
-    "database": "richie",
+    "database": "postgres",
     "synchronize": true
 }
