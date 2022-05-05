@@ -4,6 +4,9 @@
     "startup-message": "$t(app.name) очнулся!",
     "shutdown-message": "хороших снов, сладкий мир ResidentSleeper"
   },
+  "commands": {
+    "admin-only": "Эта комманда не доступна вам"
+  },
   "modules": {
     "test": {
       "commands": {

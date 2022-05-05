@@ -4,6 +4,9 @@
     "startup-message": "$t(app.name) is awake!",
     "shutdown-message": "goodnite, sweet world ResidentSleeper"
   },
+  "commands": {
+    "admin-only": "This command is unavailable for you"
+  },
   "modules": {
     "test": {
       "commands": {

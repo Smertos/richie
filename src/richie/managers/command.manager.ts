@@ -6,10 +6,17 @@ export class CommandManager {
 
   constructor(public bot: Bot) { }
 
-  onCommand(user: string, commandSlug: string, commandArgs: Array<string>): void {
+  async onCommand(user: string, commandSlug: string, commandArgs: Array<string>): Promise<void> {
     const command = this.registeredCommands[commandSlug];
 
     if (command && command.isEnabled) {
+      if (command.options.isAdminOnly && !this.bot.botConfig.admins.includes(user)) {
+        const noAccessMessage = this.bot.i18n.t('commands.admin-only');
+        await this.bot.chatClient.say(this.bot.botConfig.channelName, noAccessMessage);
+
+        return;
+      }
+
       void command.execute(user, commandArgs);
     }
   }

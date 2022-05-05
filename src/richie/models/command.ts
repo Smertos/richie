@@ -1,15 +1,30 @@
 import { Bot } from 'richie/bot';
 
+export type TCommandOptions = {
+  isAdminOnly: boolean;
+  usageArgs: Array<string>;
+};
+
+const defaultOptions: TCommandOptions = {
+  isAdminOnly: false,
+  usageArgs: []
+};
+
 export abstract class Command {
   public static readonly prefix: string = '!';
 
   public isEnabled: boolean = false;
+  public options: TCommandOptions = { ...defaultOptions };
 
   constructor(
     public slug: string,
     public bot: Bot,
-    public usageArgs: Array<string> = []
-  ) { }
+    options?: Partial<TCommandOptions>
+  ) {
+    if (options) {
+      this.options = { ...defaultOptions, ...options };
+    }
+  }
 
   async disable(): Promise<void> {
     this.isEnabled = false;
@@ -24,11 +39,11 @@ export abstract class Command {
   get usage(): string {
     const baseUsage = `Usage: ${Command.prefix}${this.slug}`;
 
-    if (this.usageArgs.length === 0) {
+    if (this.options.usageArgs.length === 0) {
       return baseUsage;
     }
 
-    const usageArgsJoined = this.usageArgs.join(' ')
+    const usageArgsJoined = this.options.usageArgs.join(' ')
 
     return `${baseUsage} ${usageArgsJoined}`;
   }

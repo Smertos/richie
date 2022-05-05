@@ -5,7 +5,10 @@ export class AddTimerCommand extends Command {
   private static readonly command: string = 'add-timer';
 
   constructor(bot: Bot) {
-    super(AddTimerCommand.command, bot, ['<period-seconds>', '<message>']);
+    super(AddTimerCommand.command, bot, {
+      isAdminOnly: true,
+      usageArgs: ['<period-seconds>', '<message>']
+    });
   }
 
   override async execute(_user: string, args: Array<string>): Promise<void> {
